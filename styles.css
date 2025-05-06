@@ -1,0 +1,191 @@
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #151515;
+    color: white;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 300;
+}
+
+.main-div {
+    width: 100%;
+    background-color: none;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.content-div{
+    width: 95%;
+    max-width: 650px;
+
+}
+
+.row-div {
+    display: flex;
+    gap: 20px;
+    padding: 5px 0px;
+    align-items: center;
+}
+
+.wrapper {
+    padding: 10px 0px;
+}
+
+.collapsible-div {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.collapse {
+    background-color: #373d56;
+    padding: 0rem 0.938rem ;
+    margin-top: 30px;
+    border-radius:15px ;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+button {
+    background-color: #975c9f;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 100;
+    padding: 0.313rem 0.938rem;
+}
+
+button:hover {
+    background-color: #b85c8a;
+    cursor: pointer;
+}
+
+.spectrum {
+    width: 100%;
+}
+
+label {
+    font-weight: 500;
+}
+
+input[type="number"] {
+    width: 50px;
+    height: 30px;
+    color: white;
+    background-color: transparent;
+    box-shadow: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ==== SLIDERS =====*/
+
+input[type="range"] {
+    color: #975c9f;
+    width: 100%;
+    padding: 10px 0px;
+    background-color: red;
+    --thumb-height: 1.5em;
+    --track-height: 0.2em;
+    --track-color: white;
+    --brightness-hover: 140%;
+    --brightness-down: 160%;
+    --clip-edges: 0.125em;
+}
+
+/* range commons */
+ 
+input[type="range"] {
+    position: relative;
+    background: #fff0;
+    overflow: hidden;
+}
+
+
+input[type="range"]:active {
+    cursor: grabbing;
+}
+
+input[type="range"]:disabled {
+    filter: grayscale(1);
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+
+/* WebKit specific styles  */
+ 
+input[type="range"],
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    transition: all ease 100ms;
+    height: var(--thumb-height);
+}
+
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-webkit-slider-thumb {
+    position: relative;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    --thumb-radius: calc((var(--thumb-height) * 0.5) - 1px);
+    --clip-top: calc((var(--thumb-height) - var(--track-height)) * 0.5 - 0.5px);
+    --clip-bottom: calc(var(--thumb-height) - var(--clip-top));
+    --clip-further: calc(100% + 1px);
+    --box-fill: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0
+        100vmax currentColor;
+
+    width: var(--thumb-width, var(--thumb-height));
+    background: linear-gradient(currentColor 0 0) scroll no-repeat left center /
+        50% calc(var(--track-height) + 1px);
+    background-color: currentColor;
+    box-shadow: var(--box-fill);
+    border-radius: var(--thumb-width, var(--thumb-height));
+
+    filter: brightness(100%);
+    clip-path: polygon(
+        100% -1px,
+        var(--clip-edges) -1px,
+        0 var(--clip-top),
+        -100vmax var(--clip-top),
+        -100vmax var(--clip-bottom),
+        0 var(--clip-bottom),
+        var(--clip-edges) 100%,
+        var(--clip-further) var(--clip-further)
+    );
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    filter: brightness(var(--brightness-hover));
+    cursor: grab;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    filter: brightness(var(--brightness-down));
+    cursor: grabbing;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(var(--track-color) 0 0) scroll no-repeat center /
+        100% calc(var(--track-height) + 1px);
+}
+
+input[type="range"]:disabled::-webkit-slider-thumb {
+    cursor: not-allowed;
+}
+
+
+  
