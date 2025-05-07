@@ -33,6 +33,10 @@ h1, h2, h3, h4 {
     justify-content: space-between;
 }
 
+.row-div-carousel{
+    overflow-x: auto;
+}
+
 .wrapper {
     padding: 10px 0px;
 }
