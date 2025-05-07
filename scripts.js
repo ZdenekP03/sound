@@ -52,7 +52,7 @@ for (let i = 0; i < reverseCurve.length; i++) {
     reverseCurve[i] = (1 - t) * (1 - t); // quadratic ease-out
 }
 
-// ▶️ Spuštění šumu
+// --- ▶️ Spuštění šumu
 function startNoise() {
     if (isPlaying) return;
     isPlaying = true;
@@ -72,14 +72,14 @@ function startNoise() {
     filter = audioCtx.createBiquadFilter();
     filter.type = "lowpass";
     filter.frequency.setValueAtTime(document.getElementById('freqSlider').value, audioCtx.currentTime);
-    filter.Q.setValueAtTime(document.getElementById('QSlider').value, audioCtx.currentTime);
+    filter.Q.setValueAtTime(document.getElementById('qSlider').value, audioCtx.currentTime);
     
 
     filter2 = audioCtx.createBiquadFilter();
     filter2.type = "peaking";
     filter2.frequency.setValueAtTime(document.getElementById('freqSlider2').value, audioCtx.currentTime);
-    filter2.Q.setValueAtTime(document.getElementById('QSlider2').value, audioCtx.currentTime);
-    filter2.gain.setValueAtTime(document.getElementById('GainSlider2').value, audioCtx.currentTime);
+    filter2.Q.setValueAtTime(document.getElementById('qSlider2').value, audioCtx.currentTime);
+    filter2.gain.setValueAtTime(document.getElementById('gainSlider2').value, audioCtx.currentTime);
 
 
     gainNode = audioCtx.createGain();
@@ -98,7 +98,7 @@ function startNoise() {
     whiteNoise.start();
 }
 
-// ⏹ Zastavení šumu
+// --- ⏹ Zastavení šumu
 function stopNoise() {
   if (!isPlaying || !gainNode || !audioCtx) return;
 
@@ -123,7 +123,7 @@ function stopNoise() {
 }
 
 
-// Timer
+// --- Timer
 const clock = document.getElementById('clock');
 let clockInterval = null;
 
@@ -171,45 +171,184 @@ let collapse = document.getElementById("collapse");
     } else {
         content.style.maxHeight = content.scrollHeight + "px";
     }
- })
+ });
 
 
 
-//  Slidery pro ladění frekvence
+// --- Slidery a numerické inputy pro ovládání filtrů
 
-document.getElementById('freqSlider').addEventListener('input', (e) => {
+// Low pass freq
+function updateFrequency(value) {
+    // Update both UI elements
+    const min = 20;
+    const max = 10000;
+    value = Math.max(min, Math.min(max, value || min));    
+    
+    freqSlider.value = value;
+    freqNumber.value = value;
+
+    // Apply the frequency
     if (filter) {
-            const freq = parseFloat(e.target.value);
-            filter.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        const freq = parseFloat(value);
+        filter.frequency.setValueAtTime(freq, audioCtx.currentTime);
     }
+}
+
+const freqNumber = document.getElementById('freqNumber');
+freqNumber.addEventListener('change', (event) => {
+    updateFrequency(event.target.value);
 });
 
-document.getElementById('QSlider').addEventListener('input', (e) => {
+const freqSlider = document.getElementById('freqSlider');
+freqSlider.addEventListener('input', (event) => {
+    updateFrequency(event.target.value)
+});
+
+
+// Low pass Q
+function updateQ(value) {
+    const min = 0.01;
+    const max = 5;
+    value = Math.max(min, Math.min(max, value || min));
+
+    qSlider.value = value;
+    qNumber.value = value;
+
     if (filter) {
-        const q = parseFloat(e.target.value);
+        const q =parseFloat(value);
         filter.Q.setValueAtTime(q, audioCtx.currentTime);
     }
-})
+}
 
-document.getElementById('GainSlider2').addEventListener('input', (e) => {
-    if (filter2) {
-        const fGain = parseFloat(e.target.value);
-        filter2.gain.setValueAtTime(fGain, audioCtx.currentTime);
-    }
+const qNumber = document.getElementById('qNumber');
+qNumber.addEventListener('change', (event) => {
+    updateQ(event.target.value)
 });
 
-document.getElementById('freqSlider2').addEventListener('input', (e) => {
+const qSlider = document.getElementById('qSlider');
+qSlider.addEventListener('input', (event) => {
+    updateQ(event.target.value)
+});
+
+
+
+// Peak filter gain
+function updateGain2(value) {
+    const min = -90;
+    const max = 90;
+    value = Math.max(min, Math.min(max, value || min));
+
+    gainSlider2.value = value;
+    gainNumber2.value = value;
+
     if (filter2) {
-        const freq = parseFloat(e.target.value);
+        const gain = parseFloat(value);
+        filter2.gain.setValueAtTime(gain, audioCtx.currentTime); 
+    }
+}
+
+const gainNumber2 = document.getElementById('gainNumber2');
+gainNumber2.addEventListener('change', (event) => {
+    updateGain2(event.target.value);
+})
+
+const gainSlider2 = document.getElementById('gainSlider2');
+gainSlider2.addEventListener('input', (event) => {
+    updateGain2(event.target.value);
+});
+
+// Peak filter freq
+function updateFrequency2(value){
+    const min = 20;
+    const max = 10000;
+    value = Math.max(min, Math.min(max, value || min));
+
+    freqSlider2.value = value;
+    freqNumber2.value = value;
+
+    if (filter2) {
+        const freq = parseFloat(value);
         filter2.frequency.setValueAtTime(freq, audioCtx.currentTime);
     }
-});
+}
 
-document.getElementById('QSlider2').addEventListener('input', (e) => {
-    if (filter2) {
-        const q = parseFloat(e.target.value);
-        filter2.Q.setValueAtTime(q, audioCtx.currentTime);
-    }
+const freqNumber2 = document.getElementById('freqNumber2');
+freqNumber2.addEventListener('change', (event) => {
+    updateFrequency2(event.target.value);
 })
 
+const freqSlider2 = document.getElementById('freqSlider2');
+freqSlider2.addEventListener('input', (event) => {
+    updateFrequency2(event.target.value);
+});
 
+
+// Peak filter Q
+function updateQ2(value) {
+    const min = 0.01;
+    const max = 5;
+    value = Math.max(min, Math.min(max, value || min));
+
+    qSlider2.value = value;
+    qNumber2.value = value;
+
+    if (filter2) {
+        const q = parseFloat(value);
+        filter2.Q.setValueAtTime(q, audioCtx.currentTime)
+    }
+}
+
+const qNumber2 = document.getElementById('qNumber2');
+qNumber2.addEventListener('change', (event) => {
+    updateQ2(event.target.value);
+})
+
+const qSlider2 = document.getElementById('qSlider2');
+qSlider2.addEventListener('input', (event) => {
+    updateQ2(event.target.value)
+});
+
+
+// --- Presety
+function applyPreset(preset){
+    updateFrequency(preset.lpf);
+    updateQ(preset.lpq);
+    updateGain2(preset.pfg);
+    updateFrequency2(preset.pff);
+    updateQ2(preset.pfq);
+}
+
+const presetDeepBrownian = {
+    lpf : 2071,
+    lpq : 0.01,
+    pfg : -54,
+    pff : 3513,
+    pfq : 1.8
+}
+
+const presetDeepPink = {
+    lpf : 2927,
+    lpq : 0.01,
+    pfg : -42,
+    pff : 4147,
+    pfq : 0.64
+}
+
+const presetBrownian = {
+    lpf : 741,
+    lpq : 0.01,
+    pfg : -17,
+    pff : 646,
+    pfq : 0.24
+}
+
+const presetPink = {
+    lpf : 7616,
+    lpq : 0.01,
+    pfg : -31,
+    pff : 7901,
+    pfq : 0.1
+}
+
+
+applyPreset(presetDeepBrownian);

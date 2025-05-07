@@ -29,6 +29,10 @@ h1, h2, h3, h4 {
     align-items: center;
 }
 
+.row-div-spacebetween {
+    justify-content: space-between;
+}
+
 .wrapper {
     padding: 10px 0px;
 }

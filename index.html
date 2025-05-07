@@ -24,6 +24,14 @@
         <p id="clock" class="clock"> 00:00</p>
       </div>
 
+      <h3>Presets</h3>
+      <div class="row-div">
+        <button onclick="applyPreset(presetDeepBrownian)"> Deep Brownian</button>
+        <button onclick="applyPreset(presetDeepPink)"> Deep Pink</button>
+        <button onclick="applyPreset(presetBrownian)">Brownian</button>
+        <button onclick="applyPreset(presetPink)">Pink</button>
+      </div>
+
       <div class="row-div collapse" id="collapse">
         <p>Adjust </p>
         <p>+</p>
@@ -32,42 +40,59 @@
       <div class="collapsible-div">
         <div class="wrapper">
           <label>
-            Lowpass Frequency: <br>
-            <input type="range" min="20" max="20000" value="5000" step="1" id="freqSlider">
+            <div class="row-div row-div-spacebetween">
+              Lowpass Frequency:
+              <input type="number" id="freqNumber">
+            </div>
+
+            <input type="range" min="20" max="10000" value="5000" step="1" id="freqSlider">
           </label>
         </div>
   
         <div class="wrapper">
           <label>
-            Lowpass Q: <br>
-            <input type="range" min="0.01" max="5" value="0.5" step="0.01" id="QSlider">
+            <div class="row-div row-div-spacebetween">
+              Lowpass Q:
+              <input type="number" id="qNumber">
+            </div>
+
+            <input type="range" min="0.01" max="5" value="0.5" step="0.01" id="qSlider">
           </label>
         </div>
   
         <div class="wrapper">
           <label>
-            Peak Filter Gain: <br>
-            <input type="range" min="-200" max="200" value="0" step="1" id="GainSlider2">
+            <div class="row-div row-div-spacebetween">
+              Peak Filter Gain:
+              <input type="number" min="-90" max="90" id="gainNumber2">
+            </div>
+            
+            <input type="range" min="-90" max="90" value="0" step="1" id="gainSlider2">
           </label>
         </div>
   
         <div class="wrapper">
           <label>
-            Peak Filter Frequency: <br>
-            <input type="range" min="20" max="20000" value="8000" step="1" id="freqSlider2">
+            <div class="row-div row-div-spacebetween">
+              Peak Filter Frequency:
+              <input type="number" min="20" max="10000" id="freqNumber2">
+            </div>
+            
+            <input type="range" min="20" max="10000" value="8000" step="1" id="freqSlider2">
           </label>
         </div>
   
         <div class="wrapper">
           <label>
-            Peak filter Q: <br>
-            <input type="range" min="0.01" max="10" value="5" step="0.01" id="QSlider2">
+            <div class="row-div row-div-spacebetween">
+              Peak filter Q:
+              <input type="number" min="0.01" max="5" id="qNumber2">
+            </div>
+             
+            <input type="range" min="0.01" max="5" value="2.5" step="0.01" id="qSlider2">
           </label>
         </div>
-  
-        <div class="row-div">
-        Presets
-        </div>
+
       </div>
       
 
