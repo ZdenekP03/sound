@@ -57,21 +57,34 @@ h1, h2, h3, h4 {
     cursor: pointer;
 }
 
+.collapse:hover {
+    background-color: #b85c8a;
+}
+
 button {
     background-color: #975c9f;
     color: white;
     border: none;
     border-radius: 15px;
     font-family: "Poppins", sans-serif;
-    font-size: 1.25rem;
+    font-size: 0.875rem;
     font-weight: 100;
     padding: 0.313rem 0.938rem;
+    cursor: pointer;
 }
 
 button:hover {
     background-color: #b85c8a;
-    cursor: pointer;
 }
+
+.playstop-button {
+    font-size: 1.25rem;
+}
+
+.preset-button {
+    background-color: #373d56;
+}
+
 
 .spectrum {
     width: 100%;
