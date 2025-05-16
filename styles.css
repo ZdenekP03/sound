@@ -16,10 +16,17 @@ h1, h2, h3, h4 {
     
 }
 
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    min-height: 300px;
+    background-color: #151515;
+}
+
 .content-div{
     width: 95%;
     max-width: 650px;
-
 }
 
 .row-div {

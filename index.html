@@ -19,7 +19,7 @@
 
       <div class="row-div">
         <label>Set Timer</label>
-        <input type="number" id="timerInput">
+        <input type="number" id="timerInput" placeholder="min">
         <button id="start" onclick="timer(document.getElementById('timerInput').value)"> Start timer</button>
         <p id="clock" class="clock"> 00:00</p>
       </div>
@@ -93,13 +93,16 @@
           </label>
         </div>
 
-      </div>
-      
+       <div style="width: 100%; height: 300px;"></div>
 
+      </div>
+    </div>
+  </div>
+
+  <div class="main-div bottom-bar">
+    <div class="content-div">
       <canvas id="spectrum" class="spectrum" width="600" height="300"></canvas>
     </div>
-    
-
   </div>
   
   

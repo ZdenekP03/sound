@@ -163,7 +163,7 @@ function timer(time){
 }
 
 // Schování sliderů
-let collapse = document.getElementById("collapse");
+const collapse = document.getElementById("collapse");
  collapse.addEventListener('click', function() {
     let content = this.nextElementSibling;
     if(content.style.maxHeight){
