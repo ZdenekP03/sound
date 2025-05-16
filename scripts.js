@@ -164,12 +164,22 @@ function timer(time){
 
 // Schování sliderů
 const collapse = document.getElementById("collapse");
+const collapseIndicator = document.getElementById("collapse-indicator");
+
  collapse.addEventListener('click', function() {
     let content = this.nextElementSibling;
     if(content.style.maxHeight){
         content.style.maxHeight = null;
+        collapseIndicator.textContent = '+';
     } else {
         content.style.maxHeight = content.scrollHeight + "px";
+        collapseIndicator.textContent = '-';
+        setTimeout(()=>{
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+              });
+        },350)
     }
  });
 
