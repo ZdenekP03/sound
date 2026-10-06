@@ -160,6 +160,9 @@ const timerRive = new rive.Rive({
         const vmi = timerRive.viewModelInstance;
         const time = vmi.number('time');
         const grabbed = vmi.boolean('isHandleGrabbed');
+        const backgroundColor = vmi.color('backgroundColor');
+
+        backgroundColor.value = 0x00282828;
 
         let lastTime = time.value;
         time.on(() => {
