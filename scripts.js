@@ -4,6 +4,7 @@ let filter2 = null;
 let whiteNoise = null;
 let gainNode = null;
 let isPlaying = false;
+let stopTimeout = null;
 
 
 // 🎧 AudioContext a Analyser hned od začátku
@@ -54,6 +55,18 @@ for (let i = 0; i < reverseCurve.length; i++) {
 
 // --- ▶️ Spuštění šumu
 function startNoise() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+    if (stopTimeout) {
+        clearTimeout(stopTimeout);
+        stopTimeout = null;
+        const now = audioCtx.currentTime;
+        gainNode.gain.cancelScheduledValues(now);
+        gainNode.gain.setValueAtTime(gainNode.gain.value, now);
+        gainNode.gain.linearRampToValueAtTime(1, now + FADE_DURATION);
+        return;
+    }
+
     if (isPlaying) return;
     isPlaying = true;
 
@@ -100,7 +113,7 @@ function startNoise() {
 
 // --- ⏹ Zastavení šumu
 function stopNoise() {
-  if (!isPlaying || !gainNode || !audioCtx) return;
+  if (!isPlaying || !gainNode || !audioCtx || stopTimeout) return;
 
   const now = audioCtx.currentTime;
 
@@ -108,7 +121,8 @@ function stopNoise() {
   gainNode.gain.setValueAtTime(gainNode.gain.value, now);
   gainNode.gain.setTargetAtTime(0, now, 1.5);
 
-  setTimeout(() => {
+  stopTimeout = setTimeout(() => {
+    stopTimeout = null;
     if (whiteNoise) {
         whiteNoise.stop();
         whiteNoise.disconnect();
@@ -123,44 +137,52 @@ function stopNoise() {
 }
 
 
-// --- Timer
-const clock = document.getElementById('clock');
-let clockInterval = null;
+// --- Timer (Rive)
+const timerCanvas = document.getElementById('timer-canvas');
 
-function timeFormat(seconds){
-    let min = Math.floor(seconds / 60);
-    if (min < 10){ min = '0' + min; }
+timerCanvas.addEventListener('pointerdown', () => {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+});
 
-    let sec = seconds % 60;
-    if (sec < 10){ sec = '0' + sec; }
+const timerRive = new rive.Rive({
+    src: 'noise_timer_ui.riv',
+    canvas: timerCanvas,
+    autoplay: true,
+    stateMachines: 'State Machine 1',
+    autoBind: true,
+    layout: new rive.Layout({
+        fit: rive.Fit.Contain,
+        alignment: rive.Alignment.Center,
+    }),
+    onLoad: () => {
+        timerRive.resizeDrawingSurfaceToCanvas();
 
-    const time = min + ':' + sec; 
+        const vmi = timerRive.viewModelInstance;
+        const time = vmi.number('time');
+        const grabbed = vmi.boolean('isHandleGrabbed');
 
-    return time;
-}
+        let lastTime = time.value;
+        time.on(() => {
+            const v = time.value;
+            if (lastTime > 0 && v <= 0 && !grabbed.value) {
+                stopNoise();
+            }
+            lastTime = v;
+        });
 
-function timer(time){
-    if(!(typeof time === 'number' || time > 0) ){
-        console.log('invalid timer input')
-        return;
-    }
+        grabbed.on(() => {
+            if (grabbed.value) return;
+            if (time.value > 0) {
+                startNoise();
+            } else {
+                stopNoise();
+            }
+        });
+    },
+    onLoadError: (e) => console.error('Rive load error', e),
+});
 
-    time = time*60;
-
-    if (clockInterval){
-        clearInterval(clockInterval);
-    }
-
-    let i = 0;
-    clockInterval = setInterval(() => {
-        clock.textContent = timeFormat(time - i);
-        if(i >= time){
-            stopNoise()
-            clearInterval(clockInterval);
-        }
-        i++;
-    },1000);
-}
+window.addEventListener('resize', () => timerRive.resizeDrawingSurfaceToCanvas());
 
 // Schování sliderů
 const collapse = document.getElementById("collapse");

@@ -83,8 +83,17 @@ button:hover {
     background-color: #b85c8a;
 }
 
-.playstop-button {
-    font-size: 1.25rem;
+.timer {
+    width: min(80vw, 360px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+}
+
+.timer canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
 }
 
 .preset-button {

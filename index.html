@@ -12,16 +12,8 @@
   <div class="main-div">
     <div class="content-div">
       <h1>Noise generator</h1>
-      <div class="row-div">
-        <button class="playstop-button" onclick="startNoise()"> Play </button>
-        <button class="playstop-button" onclick="stopNoise()">Stop</button>
-      </div>
-
-      <div class="row-div">
-        <label>Set Timer</label>
-        <input type="number" id="timerInput" placeholder="min">
-        <button id="start" onclick="timer(document.getElementById('timerInput').value)"> Start timer</button>
-        <p id="clock" class="clock"> 00:00</p>
+      <div class="timer">
+        <canvas id="timer-canvas"></canvas>
       </div>
 
       <h3>Presets</h3>
@@ -107,6 +99,7 @@
   
   
 
+  <script src="https://unpkg.com/@rive-app/webgl2@2.44.0"></script>
   <script src="scripts.js"></script>
   
 </body>
