@@ -7,16 +7,17 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+
+<body> 
 
   <div class="main-div">
     <div class="content-div">
+      
       <h1>Noise generator</h1>
-      <div class="timer">
-        <canvas id="timer-canvas"></canvas>
-      </div>
+      
+      <canvas id="spectrum" class="spectrum" width="600" height="150"></canvas>
 
-      <h3>Presets</h3>
+      <small class="small">Presets</small>
       <div class="row-div row-div-carousel">
         <button class="preset-button" onclick="applyPreset(presetDeepBrownian)"> Deep Brownian</button>
         <button class="preset-button" onclick="applyPreset(presetDeepPink)"> Deep Pink</button>
@@ -85,17 +86,20 @@
           </label>
         </div>
 
-       <div style="width: 100%; height: 300px;"></div>
-
       </div>
+
+      <!-- <div style="width: 100%; height: 300px;"></div> -->
+
     </div>
   </div>
 
   <div class="main-div bottom-bar">
-    <div class="content-div">
-      <canvas id="spectrum" class="spectrum" width="600" height="300"></canvas>
+    <div class="timer">
+      <canvas id="timer-canvas"></canvas>
     </div>
   </div>
+  
+
   
   
 

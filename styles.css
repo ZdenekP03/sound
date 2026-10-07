@@ -4,8 +4,28 @@ body {
     color: white;
 }
 
-h1, h2, h3, h4 {
+/* ==== TYPOGRAPHY ==== */
+
+h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
+    line-height: 1.3;
+    margin: 0.5em 0;
+}
+
+h1 { font-size: 1.5rem; }    /* 24px */
+h2 { font-size: 1.25rem; }   /* 20px */
+h3 { font-size: 1.125rem; }  /* 18px */
+h4 { font-size: 1rem; }      /* 16px */
+h5 { font-size: 0.875rem; }  /* 14px */
+h6 { font-size: 0.75rem; }   /* 12px */
+
+p {
+    font-size: 1rem;
+    line-height: 0.5;
+}
+
+small {
+    font-size: 0.75rem;
 }
 
 .main-div {
@@ -19,8 +39,14 @@ h1, h2, h3, h4 {
 .bottom-bar {
     position: fixed;
     bottom: 0;
-    z-index: 1;
+    z-index: -1;
     background-color: #151515;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
 .content-div{
@@ -31,7 +57,7 @@ h1, h2, h3, h4 {
 .row-div {
     display: flex;
     gap: 20px;
-    padding: 5px 0px;
+    padding: 0px 0px;
     align-items: center;
 }
 
@@ -56,7 +82,7 @@ h1, h2, h3, h4 {
 .collapse {
     background-color: #373d56;
     padding: 0rem 0.938rem ;
-    margin-top: 30px;
+    margin-top: 15px;
     border-radius:15px ;
     display: flex;
     justify-content: space-between;

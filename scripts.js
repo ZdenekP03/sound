@@ -149,6 +149,7 @@ const timerRive = new rive.Rive({
     canvas: timerCanvas,
     autoplay: true,
     stateMachines: 'State Machine 1',
+    isTouchScrollEnabled: false,
     autoBind: true,
     layout: new rive.Layout({
         fit: rive.Fit.Contain,
