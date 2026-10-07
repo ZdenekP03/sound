@@ -10,12 +10,11 @@
 
 <body> 
 
-  <div class="main-div">
-    <div class="content-div">
-      
-      <h2>Noise generator</h2>
-      
-      <canvas id="spectrum" class="spectrum" width="600" height="300"></canvas>
+  <div class="app">
+    <h2 class="app-header">Noise generator</h2>
+    <canvas id="spectrum" class="spectrum" width="600" height="300"></canvas>
+
+    <div class="controls">
 
       <div class="row-div row-div-carousel">
         <button class="preset-button" onclick="applyPreset(presetDeepBrownian)"> Deep Brownian</button>
@@ -87,11 +86,11 @@
 
       </div>
     </div>
-  </div>
 
-  <div class="main-div bottom-bar">
-    <div class="timer">
-      <canvas id="timer-canvas"></canvas>
+    <div class="timer-area">
+      <div class="timer">
+        <canvas id="timer-canvas"></canvas>
+      </div>
     </div>
   </div>
   

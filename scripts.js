@@ -19,6 +19,14 @@ let dataArray = new Uint8Array(bufferLength);
 let canvas = document.getElementById("spectrum");
 let ctx = canvas.getContext("2d");
 
+function resizeSpectrum() {
+    if (canvas.clientWidth === 0 || canvas.clientHeight === 0) return;
+    canvas.width = Math.round(canvas.clientWidth * devicePixelRatio);
+    canvas.height = Math.round(canvas.clientHeight * devicePixelRatio);
+}
+resizeSpectrum();
+new ResizeObserver(resizeSpectrum).observe(canvas);
+
 // 🔄 Spektrum – běží hned od začátku
 function drawSpectrum() {
     requestAnimationFrame(drawSpectrum);
@@ -27,16 +35,29 @@ function drawSpectrum() {
 
     ctx.fillStyle = "#151515";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
 
-    const barWidth = ((canvas.width - bufferLength) / bufferLength) * 1;
-    let x = 0;
+    const vertical = canvas.height > canvas.width;
+    const gap = devicePixelRatio;
 
-    for (let i = 0; i < bufferLength; i++) {
-        const barHeight = dataArray[i];
-        ctx.fillStyle = `rgb(${barHeight + 100}, 50, 150)`;
-        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-        x += barWidth + 1;
+    if (vertical) {
+        const thickness = (canvas.height - gap * bufferLength) / bufferLength;
+
+        for (let i = 0; i < bufferLength; i++) {
+            const v = dataArray[i];
+            const length = v / 255 * canvas.width;
+            const y = canvas.height - (i + 1) * (thickness + gap);
+            ctx.fillStyle = `rgb(${v + 100}, 50, 150)`;
+            ctx.fillRect(0, y, length, thickness);
+        }
+    } else {
+        const thickness = (canvas.width - gap * bufferLength) / bufferLength;
+
+        for (let i = 0; i < bufferLength; i++) {
+            const v = dataArray[i];
+            const length = v / 255 * canvas.height;
+            ctx.fillStyle = `rgb(${v + 100}, 50, 150)`;
+            ctx.fillRect(i * (thickness + gap), canvas.height - length, thickness, length);
+        }
     }
 }
 drawSpectrum();
