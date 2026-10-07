@@ -20,8 +20,8 @@ h5 { font-size: 0.875rem; }  /* 14px */
 h6 { font-size: 0.75rem; }   /* 12px */
 
 p {
-    font-size: 1rem;
-    line-height: 0.5;
+    font-size: 0.875rem;
+    line-height: 1;
 }
 
 small {
@@ -33,6 +33,7 @@ small {
     background-color: none;
     display: flex;
     justify-content: center;
+    font-size: 0.875rem;
     
 }
 
@@ -52,6 +53,9 @@ small {
 .content-div{
     width: 95%;
     max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .row-div {
@@ -80,18 +84,17 @@ small {
 }
 
 .collapse {
-    background-color: #373d56;
-    padding: 0rem 0.938rem ;
-    margin-top: 15px;
+    background-color:transparent;
+    padding: 0rem  ;
+    margin-top: 0px;
     border-radius:15px ;
     display: flex;
-    justify-content: space-between;
+    width: fit-content;
+    justify-content: left;
     cursor: pointer;
 }
 
-.collapse:hover {
-    background-color: #b85c8a;
-}
+
 
 button {
     background-color: #975c9f;
