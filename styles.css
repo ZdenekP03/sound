@@ -36,7 +36,6 @@ small {
     flex-direction: column;
     gap: 20px;
     font-size: 0.875rem;
-    padding-bottom: min(80vw, 360px);
 }
 
 .controls {
