@@ -47,7 +47,7 @@ function drawSpectrum() {
             const length = v / 255 * canvas.width;
             const y = canvas.height - (i + 1) * (thickness + gap);
             ctx.fillStyle = `rgb(${v + 100}, 50, 150)`;
-            ctx.fillRect(0, y, length, thickness);
+            ctx.fillRect(canvas.width - length, y, length, thickness);
         }
     } else {
         const thickness = (canvas.width - gap * bufferLength) / bufferLength;
