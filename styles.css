@@ -277,7 +277,7 @@ input[type="range"]:disabled::-webkit-slider-thumb {
             "spectrum header timer"
             "spectrum controls timer";
         justify-content: center;
-        column-gap: 40px;
+        column-gap: 60px;
         row-gap: 20px;
     }
     .app-header { grid-area: header; margin: 0; }

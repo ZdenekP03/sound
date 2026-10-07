@@ -230,6 +230,20 @@ const collapseIndicator = document.getElementById("collapse-indicator");
     }
  });
 
+const wideLayout = window.matchMedia('(min-width: 900px) and (orientation: landscape)');
+function syncCollapseWithLayout() {
+    const content = collapse.nextElementSibling;
+    if (wideLayout.matches) {
+        content.style.maxHeight = content.scrollHeight + "px";
+        collapseIndicator.textContent = '-';
+    } else {
+        content.style.maxHeight = null;
+        collapseIndicator.textContent = '+';
+    }
+}
+syncCollapseWithLayout();
+wideLayout.addEventListener('change', syncCollapseWithLayout);
+
 
 
 // --- Slidery a numerické inputy pro ovládání filtrů
