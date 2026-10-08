@@ -85,8 +85,14 @@ small {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
-    background-color: #15151500;
-    backdrop-filter: blur(10px);
+}
+
+.timer-area {
+    transition: filter 0.3s ease-out;
+}
+
+.app.filters-open .timer-area {
+    filter: blur(10px);
 }
 
 .collapse {

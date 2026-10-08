@@ -217,9 +217,11 @@ const collapseIndicator = document.getElementById("collapse-indicator");
     let content = this.nextElementSibling;
     if(content.style.maxHeight){
         content.style.maxHeight = null;
+        document.querySelector('.app').classList.remove('filters-open');
         collapseIndicator.textContent = '+';
     } else {
         content.style.maxHeight = content.scrollHeight + "px";
+        document.querySelector('.app').classList.add('filters-open');
         collapseIndicator.textContent = '-';
         setTimeout(()=>{
             window.scrollTo({
