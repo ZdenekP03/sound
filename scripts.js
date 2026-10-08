@@ -6,6 +6,8 @@ let gainNode = null;
 let isPlaying = false;
 let stopTimeout = null;
 
+console.log("Write devMode() in console to show numeric inputs for filter values. Write devMode(false) to hide them again.");
+
 
 // 🎧 AudioContext a Analyser hned od začátku
 let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -231,6 +233,22 @@ const collapseIndicator = document.getElementById("collapse-indicator");
         },350)
     }
  });
+
+// --- Vývojářský režim: zobrazí numerické inputy pro ladění presetů (v konzoli: devMode() / devMode(false))
+function devMode(enabled = true) {
+    document.querySelector('.app').classList.toggle('dev-mode', enabled);
+    localStorage.setItem('devMode', enabled ? '1' : '0');
+
+    const content = collapse.nextElementSibling;
+    if (content.style.maxHeight) {
+        content.style.maxHeight = content.scrollHeight + "px";
+    }
+    return `devMode ${enabled ? 'on' : 'off'}`;
+}
+
+if (localStorage.getItem('devMode') === '1') {
+    devMode(true);
+}
 
 // --- Slidery a numerické inputy pro ovládání filtrů
 
