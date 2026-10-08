@@ -234,6 +234,14 @@ const collapseIndicator = document.getElementById("collapse-indicator");
 
 // --- Slidery a numerické inputy pro ovládání filtrů
 
+// Vyplnění dráhy slideru podle aktuální hodnoty (WebKit nemá ::range-progress)
+function updateSliderFill(slider) {
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const progress = (parseFloat(slider.value) - min) / (max - min) * 100;
+    slider.style.setProperty('--progress', `${progress}%`);
+}
+
 // Low pass freq
 function updateFrequency(value) {
     // Update both UI elements
@@ -243,6 +251,7 @@ function updateFrequency(value) {
     
     freqSlider.value = value;
     freqNumber.value = value;
+    updateSliderFill(freqSlider);
 
     // Apply the frequency
     if (filter) {
@@ -270,6 +279,7 @@ function updateQ(value) {
 
     qSlider.value = value;
     qNumber.value = value;
+    updateSliderFill(qSlider);
 
     if (filter) {
         const q =parseFloat(value);
@@ -297,6 +307,7 @@ function updateGain2(value) {
 
     gainSlider2.value = value;
     gainNumber2.value = value;
+    updateSliderFill(gainSlider2);
 
     if (filter2) {
         const gain = parseFloat(value);
@@ -322,6 +333,7 @@ function updateFrequency2(value){
 
     freqSlider2.value = value;
     freqNumber2.value = value;
+    updateSliderFill(freqSlider2);
 
     if (filter2) {
         const freq = parseFloat(value);
@@ -348,6 +360,7 @@ function updateQ2(value) {
 
     qSlider2.value = value;
     qNumber2.value = value;
+    updateSliderFill(qSlider2);
 
     if (filter2) {
         const q = parseFloat(value);
