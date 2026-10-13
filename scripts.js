@@ -319,8 +319,8 @@ qSlider.addEventListener('input', (event) => {
 
 // Peak filter gain
 function updateGain2(value) {
-    const min = -90;
-    const max = 90;
+    const min = -20;
+    const max = 20;
     value = Math.max(min, Math.min(max, value || min));
 
     gainSlider2.value = value;
@@ -346,7 +346,7 @@ gainSlider2.addEventListener('input', (event) => {
 // Peak filter freq
 function updateFrequency2(value){
     const min = 20;
-    const max = 10000;
+    const max = 25000;
     value = Math.max(min, Math.min(max, value || min));
 
     freqSlider2.value = value;
@@ -407,19 +407,19 @@ function applyPreset(preset){
 }
 
 const presetDeepBrownian = {
-    lpf : 2071,
-    lpq : 0.01,
-    pfg : -54,
-    pff : 3513,
-    pfq : 1.8
+    lpf : 440,
+    lpq : 0.65,
+    pfg : 5,
+    pff : 120,
+    pfq : 0.77
 }
 
 const presetDeepPink = {
-    lpf : 2927,
+    lpf : 1000,
     lpq : 0.01,
-    pfg : -42,
-    pff : 4147,
-    pfq : 0.64
+    pfg : -12,
+    pff : 1350,
+    pfq : 0.4
 }
 
 const presetBrownian = {
